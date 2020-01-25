@@ -9,11 +9,15 @@ var fccTestingRoutes  = require('./routes/fcctesting.js');
 var runner            = require('./test-runner');
 var dotenv      = require('dotenv');
 var mongo       = require('mongodb').MongoClient;
+var helmet      = require('helmet');
 
 var app = express();
 dotenv.config();
 
 app.use('/public', express.static(process.cwd() + '/public'));
+
+app.use(helmet.hidePoweredBy({setTo: 'PHP 4.2.0'}))
+app.use(helmet.noCache())
 
 app.use(cors({origin: '*'})); //USED FOR FCC TESTING PURPOSES ONLY!
 
